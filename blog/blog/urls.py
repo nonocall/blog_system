@@ -17,6 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from config.views import links
+from typeidea.views import PostDetailView, IndexView, CategoryView, TagView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', IndexView.as_view(),name = 'index'),
+    path('category/<int:category_id>/', CategoryView.as_view(), name='category-list'),
+    path('post/<int:post_id>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/',  PostDetailView.as_view(), name='post-detail'),
+    path('tag/<int:tag_id>/', TagView.as_view(), name='tag-list'),
+    path('links/', links, name='links'),
+    path('admin/', admin.site.urls,name = 'admin'),
 ]
